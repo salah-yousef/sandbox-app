@@ -1,0 +1,26 @@
+<ul class="list-unstyled">
+  <li class="card card-body mb-2">
+      <div class="row">
+        <div class="col-sm-4">
+          <img [src]="user.image" alt="user" class="img-fluid">  
+        </div>
+        <div class="col-sm-8">
+            <h3>
+              {{ user.firstName }} {{ user.lastName }} 
+              <span [ngClass]="{'online': user.isOnline,'offline': !user.isOnline}">
+                <i class="fas fa-circle fa-xs"></i>
+              </span>
+              <button [hidden]="!user.age && !user.street && !user.city && !user.state && !user.email" (click)="toggleHide(user)" class="btn btn-sm btn-primary float-right">
+                <i [ngClass]="user.isHide ? 'fa fa-plus': 'fa fa-minus'"></i>
+              </button>
+            </h3>
+            <ul class="list-group" *ngIf="!user.isHide">
+              <li [hidden]="!user.age" class="list-group-item">Age: {{ user.age }}</li>
+              <li [hidden]="!user.street && !user.city && !user.state" class="list-group-item">Address: {{ user.street }} {{ user.city }}, {{ user.state }}</li>
+              <li [hidden]="!user.email" class="list-group-item">Email: {{user.email}}</li>
+            </ul>      
+        </div>
+      </div>      
+  </li>
+</ul>
+
