@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Input} from '@angular/core';
 import { Post } from "../../models/Post";
 import { DataService } from "../../services/data.service";
 
@@ -13,6 +13,8 @@ export class PostFormComponent implements OnInit {
     title:'',
     body:''
   };
+  @Input() currentPost: Post;
+  
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
 
   @ViewChild('postForm') form: any;

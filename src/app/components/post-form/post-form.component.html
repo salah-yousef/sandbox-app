@@ -6,7 +6,7 @@
       <input 
         type="text" 
         name="title" 
-        [(ngModel)]="post.title"
+        [(ngModel)]="currentPost.title"
         [ngClass]="{'is-invalid': postTitle.errors && postTitle.touched}"
         #postTitle = "ngModel"
         required
@@ -20,7 +20,7 @@
       <input 
       type="text" 
       name="body" 
-      [(ngModel)]="post.body"
+      [(ngModel)]="currentPost.body"
       [ngClass]="{'is-invalid': postBody.errors && postBody.touched}"
       #postBody = "ngModel"
       required

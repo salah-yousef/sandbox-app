@@ -9,6 +9,11 @@ import { DataService } from "../../services/data.service";
 })
 export class PostsComponent implements OnInit {
   posts: Post[];
+  currentPost: Post = {
+    id:0,
+    title:'',
+    body:''
+  };
 
   constructor(private postService:DataService) { }
 
@@ -20,6 +25,10 @@ export class PostsComponent implements OnInit {
 
   onNewPost(post: Post) {
     this.posts.unshift(post);
+  }
+
+  onEmittedPost(post: Post) {
+    this.currentPost = post;
   }
 
 }
