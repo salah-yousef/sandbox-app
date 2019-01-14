@@ -11,7 +11,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   showUserForm: boolean = false;
   @ViewChild('userForm') form: any;
-  user = {
+  user: User = {
     firstName: '',
     lastName: '',
     age: null,
@@ -21,14 +21,16 @@ export class UsersComponent implements OnInit {
     isOnline:true,
     isHide:true,
     email:'',
-    image:"http://lorempixel.com/600/600/people/10"
+    image:''
   };
 
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.users = this.dataService.getUsers();
+    this.dataService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
   onSubmit({value, valid}: {value:User, valid:boolean}) {

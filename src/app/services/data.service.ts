@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { User } from "../models/User";
+import { Observable } from "rxjs";
+import { of } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Post } from "../models/Post";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  users:User[];
+  users: User[];
+  postsUrl: string = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor() {        
+  constructor(
+    private http: HttpClient
+  ) {        
     this.users = [
       {
         firstName: 'John',
@@ -48,11 +55,15 @@ export class DataService {
     ];
   }
 
-  getUsers() :User[]{
-    return this.users;
+  getUsers() :Observable<User[]>{
+    return of(this.users);
   }
 
   addUser(user: User) {
     this.users.unshift(user);
+  }
+
+  getPosts() :Observable<Post[]>{
+    return this.http.get<Post[]>(this.postsUrl);
   }
 }
