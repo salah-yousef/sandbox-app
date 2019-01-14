@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { DataService } from "../../services/data.service";
 import { User } from '../../models/User'; 
 
 @Component({
@@ -25,49 +25,10 @@ export class UsersComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
-   
-      this.users = [
-        {
-          firstName: 'John',
-          lastName: 'Doe',
-          age: 30,
-          street: '50 Main st',
-          city: 'Boston',
-          state: 'MAI',
-          isOnline:true,
-          isHide:true,
-          email:'John.Doe@gmail.com',
-          image:"http://lorempixel.com/600/600/people/9"
-        },
-        {
-          firstName: 'Kevin',
-          lastName: 'Johnson',
-          age: 34,
-          street: '20 School st',
-          city: 'Lynn',
-          state: 'MA',
-          isOnline:false,
-          isHide:true,
-          email:'kevin.Johnson@gmail.com',
-          image:"http://lorempixel.com/600/600/people/6"
-        },
-        {
-          firstName: 'Karen',
-          lastName: 'Williams',
-          age: 26,
-          street: '55 Mill st',
-          city: 'Miami',
-          state: 'FL',
-          isOnline:false,
-          isHide:true,
-          email:'Karen.Williams@gmail.com',
-          image:"http://lorempixel.com/600/600/people/3"
-        }
-      ];
-
+    this.users = this.dataService.getUsers();
   }
 
   onSubmit({value, valid}: {value:User, valid:boolean}) {
@@ -77,7 +38,7 @@ export class UsersComponent implements OnInit {
       value.isHide = true;
       value.image = "http://lorempixel.com/600/600/people/8";
       value.isOnline = true;
-      this.users.unshift(value);
+      this.dataService.addUser(value);
       this.form.reset();
     }
   }
