@@ -2,6 +2,13 @@
     <div class="card-body">
       <h3>{{post.title}}</h3>
       <p>{{post.body}}</p>
+      <hr>
+      <button class="btn btn-danger">
+          <i class="fas fa-times"></i>
+      </button>
+      <button (click)="editPost(post)" class="btn btn-success">
+          <i class="fas fa-pencil-alt"></i>
+      </button>
     </div>
   </div>
   
