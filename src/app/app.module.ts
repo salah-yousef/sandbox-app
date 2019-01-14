@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DataService } from "./services/data.service";
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PostComponent } from './components/post/post.component';
     UsersComponent,
     NavbarComponent,
     PostsComponent,
-    PostComponent
+    PostComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,36 @@
+<h2>Add Post</h2>
+<div class="card card-body mb-3">
+  <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+    <div class="form-group">
+      <label>Title</label>
+      <input 
+        type="text" 
+        name="title" 
+        [(ngModel)]="post.title"
+        [ngClass]="{'is-invalid': postTitle.errors && postTitle.touched}"
+        #postTitle = "ngModel"
+        required
+        class="form-control">
+        <div [hidden]="!postTitle.errors?.required" class="invalid-feedback">
+            title is required
+        </div>      
+    </div>
+    <div class="form-group">
+      <label>Body</label>
+      <input 
+      type="text" 
+      name="body" 
+      [(ngModel)]="post.body"
+      [ngClass]="{'is-invalid': postBody.errors && postBody.touched}"
+      #postBody = "ngModel"
+      required
+      class="form-control">
+      <div [hidden]="!postBody.errors?.required" class="invalid-feedback">
+          body is required
+      </div>      
+    </div>
+    <button type="submit" [disabled]="!postForm.form.valid" class="btn btn-primary btn-block mb-3">
+        Add New Post
+    </button>
+  </form>
+</div>

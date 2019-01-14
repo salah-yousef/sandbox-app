@@ -5,6 +5,13 @@ import { of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Post } from "../models/Post";
 
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -65,5 +72,9 @@ export class DataService {
 
   getPosts() :Observable<Post[]>{
     return this.http.get<Post[]>(this.postsUrl);
+  }
+
+  addPost(post:Post) :Observable<Post>{
+    return this.http.post<Post>(this.postsUrl, post, httpOptions);
   }
 }
