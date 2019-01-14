@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import { Post } from "../../models/Post";
 import { DataService } from "../../services/data.service";
 
@@ -13,6 +13,7 @@ export class PostFormComponent implements OnInit {
     title:'',
     body:''
   };
+  @Output() newPost: EventEmitter<Post> = new EventEmitter();
 
   @ViewChild('postForm') form: any;
   constructor(
@@ -27,7 +28,7 @@ onSubmit({value, valid}: {value:Post, valid:boolean}) {
       console.log('form is not valid');
     } else {
       this.postService.addPost(value as Post).subscribe(post => {
-        console.log(post);
+        this.newPost.emit(post);
       });
       this.form.reset();
     }
