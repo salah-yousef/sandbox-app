@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Post } from "../../models/Post";
 import { DataService } from "../../services/data.service";
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-post',
@@ -19,12 +21,22 @@ export class PostComponent implements OnInit {
     title:'',
     body:''
   }
+  currentId: number = null;
   isEdit: boolean = false;
   constructor(
-    private postService:DataService
+    private postService:DataService,
+    private route:ActivatedRoute,
+    private location:Location
   ) { }
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.postService.getPosts().subscribe(posts => {
+      if(id){
+        this.currentId = id;
+        this.post = posts[id-1];
+      }
+    })
   }
 
   editPost(post: Post) {    
