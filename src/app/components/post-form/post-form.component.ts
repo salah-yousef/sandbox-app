@@ -13,6 +13,7 @@ export class PostFormComponent implements OnInit {
     title:'',
     body:''
   };
+  isHide: boolean = true;
   @Input() currentPost: Post;
   @Input() postFlag: boolean;
   

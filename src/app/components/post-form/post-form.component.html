@@ -1,5 +1,5 @@
-<h2>Add Post</h2>
-<div class="card card-body mb-3">
+<h2>Add Post <a routerLink="/posts" (click)="isHide =! isHide"><i class="far fa-plus-square"></i></a></h2>
+<div [hidden]="isHide" class="card card-body mb-3">
   <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
     <div class="form-group">
       <label>Title</label>
