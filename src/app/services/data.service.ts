@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class DataService {
   users: User[];
-  postsUrl: string = 'https://jsonplaceholder.typicode.com/posts';
+  postsUrl: string = 'https://jsonplaceholder.typicode.com/posts/';
 
   constructor(
     private http: HttpClient
@@ -76,5 +76,9 @@ export class DataService {
 
   addPost(post:Post) :Observable<Post>{
     return this.http.post<Post>(this.postsUrl, post, httpOptions);
+  }
+
+  editPost(post:Post) :Observable<Post>{
+    return this.http.put<Post>(this.postsUrl+post.id, post, httpOptions);
   }
 }

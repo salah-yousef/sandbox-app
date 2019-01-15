@@ -1,4 +1,14 @@
-<app-post-form (newPost)="onNewPost($event)" [currentPost]="currentPost">
+<app-post-form 
+(newPost)="onNewPost($event)" 
+(updatePost)="onUpdatePost($event)" 
+[currentPost]="currentPost" 
+[postFlag]="isEdit">
 </app-post-form>
 <h2>Posts</h2>
-<app-post *ngFor="let post of posts" [post]="post" (emittedPost)="onEmittedPost($event)"></app-post>
+<app-post 
+    *ngFor="let post of posts" 
+    [post]="post" 
+    (emittedPost)="onEmittedPost($event)" 
+    (emittedFlag)="onEmittedFlag($event)"
+>
+</app-post>

@@ -29,8 +29,12 @@
           body is required
       </div>      
     </div>
-    <button type="submit" [disabled]="!postForm.form.valid" class="btn btn-primary btn-block mb-3">
+    <input type="hidden" name="id" [(ngModel)]="currentPost.id">
+    <button type="submit" *ngIf="!postFlag" [disabled]="!postForm.form.valid" class="btn btn-primary btn-block mb-3">
         Add New Post
+    </button>
+    <button type="submit" *ngIf="postFlag" [disabled]="!postForm.form.valid" class="btn btn-warning btn-block mb-3">
+        Edit Post
     </button>
   </form>
 </div>

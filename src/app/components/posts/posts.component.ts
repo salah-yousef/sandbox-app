@@ -15,6 +15,8 @@ export class PostsComponent implements OnInit {
     body:''
   };
 
+  isEdit: boolean = false;
+
   constructor(private postService:DataService) { }
 
   ngOnInit() {
@@ -31,4 +33,17 @@ export class PostsComponent implements OnInit {
     this.currentPost = post;
   }
 
+  onEmittedFlag(flag: boolean) {
+    this.isEdit = flag;
+  }
+
+  onUpdatePost(post: Post) {
+    this.posts.forEach((currentPost, i) => {
+      if (post.id === currentPost.id) {
+        this.posts.splice(i, 1);
+        this.posts.unshift(post);
+        this.isEdit = false;
+      }
+    });
+  }
 }

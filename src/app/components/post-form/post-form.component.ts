@@ -14,8 +14,10 @@ export class PostFormComponent implements OnInit {
     body:''
   };
   @Input() currentPost: Post;
+  @Input() postFlag: boolean;
   
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
+  @Output() updatePost: EventEmitter<Post> = new EventEmitter();
 
   @ViewChild('postForm') form: any;
   constructor(
@@ -29,10 +31,18 @@ onSubmit({value, valid}: {value:Post, valid:boolean}) {
     if (!valid) {
       console.log('form is not valid');
     } else {
-      this.postService.addPost(value as Post).subscribe(post => {
-        this.newPost.emit(post);
-      });
-      this.form.reset();
+      if (this.postFlag) {
+        this.postService.editPost(value as Post).subscribe(post => {
+          this.postFlag = false;
+          this.updatePost.emit(post);
+          this.form.resetForm(this.post);
+        })
+      } else {
+        this.postService.addPost(value as Post).subscribe(post => {
+          this.newPost.emit(post);
+          this.form.resetForm(this.post);
+        });  
+      }
     }
   }
 }

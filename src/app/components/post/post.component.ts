@@ -10,20 +10,26 @@ export class PostComponent implements OnInit {
   @Input('post') post:Post; 
 
   @Output() emittedPost: EventEmitter<Post> = new EventEmitter();
+  @Output() emittedFlag: EventEmitter<boolean> = new EventEmitter();
 
   currentPost: Post = {
     id:0,
     title:'',
     body:''
   }
+  isEdit: boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
 
-  editPost(post: Post) {
+  editPost(post: Post) {    
     this.currentPost = post;
     this.emittedPost.emit(post);
+    this.isEdit = true;
+    this.emittedFlag.emit(this.isEdit);
+    
+    
   }
 
 }
