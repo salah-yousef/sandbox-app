@@ -2,7 +2,7 @@
     <i class="fas fa-arrow-circle-left"></i>
      Back To Posts
 </a>
-<div class="card" *ngIf="post">
+<div class="card" *ngIf="post; else noPost">
     <div class="card-body">
         <ng-container *ngIf="!currentId; else elseTemplate">
             <h3> <a routerLink="/post/{{post.id}}">{{post.title}}</a></h3>
@@ -20,6 +20,10 @@
           <i class="fas fa-pencil-alt"></i>
       </button>
     </div>
-  </div>
+</div>
+<ng-template #noPost>
+        <h3>not found</h3>
+</ng-template>
+
 
   

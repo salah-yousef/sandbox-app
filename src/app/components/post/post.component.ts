@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Post } from "../../models/Post";
 import { DataService } from "../../services/data.service";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -26,17 +25,21 @@ export class PostComponent implements OnInit {
   constructor(
     private postService:DataService,
     private route:ActivatedRoute,
-    private location:Location
+    private router:Router
   ) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPosts().subscribe(posts => {
-      if(id){
-        this.currentId = id;
-        this.post = posts[id-1];
-      }
-    })
+    if (id>100) {
+      this.router.navigate(['/noUserFound']);
+    }else{
+      this.postService.getPosts().subscribe(posts => {
+        if(id){
+          this.currentId = id;
+          this.post = posts[id-1];
+        }
+      })
+    }
   }
 
   editPost(post: Post) {    
