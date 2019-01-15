@@ -81,4 +81,8 @@ export class DataService {
   editPost(post:Post) :Observable<Post>{
     return this.http.put<Post>(this.postsUrl+post.id, post, httpOptions);
   }
+
+  deletePost(id: number) :Observable<Post>{
+    return this.http.delete<Post>(this.postsUrl+id,httpOptions);
+  }
 }
