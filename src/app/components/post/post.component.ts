@@ -30,15 +30,15 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    if ((id>100)||(id<1)) {
+    if ((id>100)||((id<1)&&(this.route.snapshot.paramMap.keys.pop()!=undefined))) {
       this.router.navigate(['/noUserFound']);
     }else{
       this.postService.getPosts().subscribe(posts => {
-        if(id){
+        if(id>0){
           this.currentId = id;
           this.post = posts[id-1];
         }
-      })
+      });
     }
   }
 
