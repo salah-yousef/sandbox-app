@@ -2,7 +2,7 @@
     <i class="fas fa-arrow-circle-left"></i>
      Back To Posts
 </a>
-<div class="card" *ngIf="post">
+<div class="card" *ngIf="post; else noPost">
     <div class="card-body">
         <ng-container *ngIf="!currentId; else elseTemplate">
             <h3> <a routerLink="/post/{{post.id}}">{{post.title}}</a></h3>
@@ -21,3 +21,10 @@
       </button>
     </div>
 </div>
+<ng-template #noPost>
+    <div class="d-flex mt-50 justify-content-center">
+            <div class="spinner-border" style="width: 10rem; height: 10rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+    </div>          
+</ng-template>
