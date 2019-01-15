@@ -11,7 +11,7 @@ import { User } from '../../models/User';
 export class UserComponent implements OnInit {
   // Properties
   @Input('user') user:User;
-
+  isReady:boolean = false;
   // Methods
   constructor() {
     
@@ -22,5 +22,9 @@ export class UserComponent implements OnInit {
 
   toggleHide(user:User) {
     this.user.isHide = !this.user.isHide;
+  }
+
+  spinner() {
+    this.isReady = true;
   }
 }

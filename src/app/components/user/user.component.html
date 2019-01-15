@@ -2,7 +2,12 @@
   <li class="card card-body mb-2">
       <div class="row">
         <div class="col-sm-4">
-          <img [src]="user.image" alt="user" class="img-fluid">  
+          <img [src]="user.image" alt="user" class="img-fluid" (load)="spinner()">
+          <div *ngIf="!isReady" class="d-flex mt-50 justify-content-center">
+            <div class="spinner-border" style="width: 10rem; height: 10rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+          </div>   
         </div>
         <div class="col-sm-8">
             <h3>
